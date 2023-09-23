@@ -14,3 +14,11 @@ exports.getProducts = async (req, res, next) => {
     response.sendResponse(res)
     
 }
+
+exports.getProductById = async (req, res, next) => {
+    const { id } = req.params
+
+    const response = await productsService.getProductById(id)
+
+    response.sendResponse(res)
+}

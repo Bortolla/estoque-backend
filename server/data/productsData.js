@@ -9,3 +9,7 @@ exports.postProduct = async (name, description, price, quantity, category) => {
 exports.getProducts = async () => {
     return await Product.find({}, '-__v')
 }
+
+exports.getProductById = async (id) => {
+    return await Product.findOne({ _id: id }, '-__v')
+}

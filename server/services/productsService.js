@@ -44,3 +44,14 @@ exports.getProducts = async () => {
         return new ResponseDTO('Error', 500, 'Erro no servidor')
     }
 }
+
+exports.getProductById = async (id) => {
+    try {
+        const response = await productsData.getProductById(id)
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
