@@ -55,3 +55,14 @@ exports.getProductById = async (id) => {
         return new ResponseDTO('Error', 500, 'Erro no servidor')
     }
 }
+
+exports.deleteProductById = async (id) => {
+    try {
+        const response = await productsData.deleteProductById(id)
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}

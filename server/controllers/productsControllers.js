@@ -19,6 +19,12 @@ exports.getProductById = async (req, res, next) => {
     const { id } = req.params
 
     const response = await productsService.getProductById(id)
+    response.sendResponse(res)
+}
 
+exports.deleteProductById = async (req, res, next) => {
+    const { id } = req.params
+
+    const response = await productsService.deleteProductById(id)
     response.sendResponse(res)
 }

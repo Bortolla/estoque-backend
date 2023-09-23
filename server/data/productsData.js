@@ -13,3 +13,7 @@ exports.getProducts = async () => {
 exports.getProductById = async (id) => {
     return await Product.findOne({ _id: id }, '-__v')
 }
+
+exports.deleteProductById = async (id) => {
+    return await Product.deleteOne({ _id: id })
+}
