@@ -17,3 +17,7 @@ exports.getProductById = async (id) => {
 exports.deleteProductById = async (id) => {
     return await Product.deleteOne({ _id: id })
 }
+
+exports.checkIfProductExists = async (name) => {
+    return await Product.findOne({ name: name }, '-__v')
+}

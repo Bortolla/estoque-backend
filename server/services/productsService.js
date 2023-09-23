@@ -7,6 +7,10 @@ exports.postProduct = async (name, description, price, quantity, category) => {
             return new ResponseDTO('Error', 400, 'Nome não preenchido')
         }
 
+        if (await productsData.checkIfProductExists(name)) {
+            return new ResponseDTO('Error', 400, 'Nome já foi pego')
+        }
+
         if (!description) {
             return new ResponseDTO('Error', 400, 'Descrição não preenchida')
         }
@@ -22,6 +26,7 @@ exports.postProduct = async (name, description, price, quantity, category) => {
         if (!category) {
             return new ResponseDTO('Error', 400, 'Categoria não preenchida')
         }
+        
     } catch (error) {
         console.log(`Error ${error}`)
         return new ResponseDTO('Error', 500, 'Erro no servidor')
@@ -30,7 +35,6 @@ exports.postProduct = async (name, description, price, quantity, category) => {
     const response = await productsData.postProduct(name, description, price, quantity, category)
 
     return new ResponseDTO('Success', 200, response)
-
 }
 
 exports.getProducts = async () => {
