@@ -70,3 +70,32 @@ exports.deleteProductById = async (id) => {
         return new ResponseDTO('Error', 500, 'Erro no servidor')
     }
 }
+
+exports.updateProductById = async (id, field, value) => {
+    try {
+        if (!field) {
+            return new ResponseDTO('Error', 400, 'Campo não preenchido')
+        }
+
+        if (!value) {
+            return new ResponseDTO('Error', 400, 'Valor não preenchido')
+        }
+
+        const product = await productsData.getProductById(id)
+
+        if (!product) {
+            return new ResponseDTO('Error', 404, 'Produto não encontrado')
+        }
+
+        product[field] = value
+        await product.validate()
+        await product.save()
+        
+        const response = await productsData.getProductById(id)
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}

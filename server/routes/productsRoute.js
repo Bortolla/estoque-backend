@@ -7,7 +7,7 @@ router.post('/', productsController.postProduct)
 router.get('/', productsController.getProducts)
 router.get('/:id', productsController.getProductById)
 
-// router.patch('/:id', productsController.updateProductById)
+router.patch('/:id', productsController.updateProductById)
 
 router.delete('/:id', productsController.deleteProductById)
 
