@@ -11,7 +11,7 @@ app.use(helmet())
 
 app.use('/products', require('./routes/productsRoute'))
 // app.use('/sales', require('./routes/salesRoute'))
-// app.use('/users', require('./routes/usersRoute'))
+app.use('/users', require('./routes/usersRoute'))
 // app.use('/reports', require('./routes/reportsRoute'))
 
 app.listen(PORT, (error) => {
