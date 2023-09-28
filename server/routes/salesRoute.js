@@ -4,11 +4,11 @@ const router          = express.Router()
 
 router.post('/', salesController.postSales)
 
-// router.get('/', salesController.getAllSales)
-// router.get('/:id', salesController.getSalesById)
+router.get('/', salesController.getAllSales)
+router.get('/:id', salesController.getSalesById)
 
-// router.patch('/:id', salesController.updateSalesById)
+router.patch('/:id', salesController.updateSalesById)
 
-// router.delete('/:id')
+router.delete('/:id')
 
 module.exports = router
