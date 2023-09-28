@@ -22,8 +22,8 @@ exports.getUserById = async (req, res, next) => {
 exports.deleteUserById = async (req, res, next) => {
     const { id } = req.params
     
-    const response = await usersService.getUserById(id)
-    response.sendResponse(id)
+    const response = await usersService.deleteUserById(id)
+    response.sendResponse(res)
 }
 
 exports.updateUserById = async (req, res, next) => {

@@ -38,7 +38,6 @@ exports.postUser = async (name, email, password, permission) => {
         console.log(`Erro: ${error}`)
         return new ResponseDTO('Error', 500, 'Erro no servidor')
     }
-
 }
 
 exports.getAllUsers = async () => {
@@ -85,6 +84,37 @@ exports.updateUserById = async (id, field, value) => {
 exports.deleteUserById = async (id) => {
     try {
         const response = await usersData.deleteUserById(id)
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Erro: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.updateUserById = async (id, value, field) => {
+    try {
+        if (!field) {
+            return new ResponseDTO('Error', 400, 'Campo que deseja ser atualizado não preenchido.')
+        }
+
+        if (!value) {
+            return new ResponseDTO('Error', 400, 'Valor do campo que deseja ser atualizado não preenchido.')
+        }
+
+        const user = await usersData.getUserById(id)
+
+        if (!user) {
+            return new ResponseDTO('Error', 404, 'Usuário não encontrado.')
+        }
+
+        user.field = value
+
+        await user.validate()
+        await user.save()
+
+        const response = await usersData.getUserById(id)
+
         return new ResponseDTO('Success', 200, 'ok', response)
 
     } catch (error) {
