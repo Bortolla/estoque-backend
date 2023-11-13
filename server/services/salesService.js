@@ -1,7 +1,7 @@
 const { ResponseDTO } = require('../dtos/Response')
-const salesData    = require('../data/salesData')
-const productsData = require('../data/productsData')
-const usersData    = require('../data/usersData')
+const salesData       = require('../data/salesData')
+const productsData    = require('../data/productsData')
+const usersData       = require('../data/usersData')
 
 exports.postSales = async (quantity, total_price, productId, userId) => {
     try {
