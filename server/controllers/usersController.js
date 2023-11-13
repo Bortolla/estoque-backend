@@ -33,3 +33,10 @@ exports.updateUserById = async (req, res, next) => {
     const response = await usersService.updateUserById(id, field, value)
     response.sendResponse(res)
 }
+
+exports.loginUser = async (req, res, next) => {
+    const { email, password } = req.body
+
+    const response = await usersService.loginUser(email, password)
+    response.sendResponse(res)
+}

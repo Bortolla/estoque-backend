@@ -1,4 +1,6 @@
+const secret          = process.env.SECRET
 const bcrypt          = require('bcrypt')
+const jwt             = require('jsonwebtoken')
 const { ResponseDTO } = require('../dtos/Response')
 const usersData       = require('../data/usersData')
 
@@ -116,6 +118,42 @@ exports.updateUserById = async (id, value, field) => {
         const response = await usersData.getUserById(id)
 
         return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Erro: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.loginUser = async (email, password) => {
+    try {
+        if (!email) {
+            return new ResponseDTO('Error', 422, 'Email não preenchido')
+        }
+
+        if (!password) {
+            return new ResponseDTO('Error', 422, 'Senha não preenchida')
+        }
+
+        const user = await usersData.getUserByEmail(email)
+
+        if (!user) {
+            return new ResponseDTO('Error', 422, 'Usuário não encontrado')
+        }
+
+        const checkPassword = await bcrypt.compare(password, user.password)
+
+        if (!checkPassword) {
+            return new ResponseDTO('Error', 400, 'Senha inválida')
+        }
+
+        const token = jwt.sign({
+            id: user._id
+        }, secret)
+
+        const { userName, userEmail } = user
+
+        return new ResponseDTO('Success', 200, 'Usuário logado', { token, userName, userEmail })
 
     } catch (error) {
         console.log(`Erro: ${error}`)
