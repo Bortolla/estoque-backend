@@ -60,6 +60,17 @@ exports.getProductById = async (id) => {
     }
 }
 
+exports.getProductByCategory = async (category) => {
+    try {
+        const response = await productsData.getProductByCategory(category)
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
 exports.deleteProductById = async (id) => {
     try {
         const response = await productsData.deleteProductById(id)
@@ -93,6 +104,63 @@ exports.updateProductById = async (id, field, value) => {
         
         const response = await productsData.getProductById(id)
         return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.incrementQuantityById = async (id, quantity) => {
+    try {
+        if (!quantity) {
+            return new ResponseDTO('Error', 400, 'Campo não preenchido')
+        }
+
+        const product = await productsData.getProductById(id)
+
+        if (!product) {
+            return new ResponseDTO('Error', 404, 'Produto não encontrado')
+        }
+
+        const result = await productsData.incrementQuantityById(id, quantity)
+
+        if (result.acknowledged == true && result.modifiedCount == 1) {
+            const response = await productsData.getProductById(id)
+            
+            return new ResponseDTO('Success', 200, 'ok', response)
+        } else {
+            return new ResponseDTO('Error', 500, 'Erro no servidor/banco de dados')
+        }
+
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.decrementQuantityById = async (id, quantity) => {
+    try {
+        if (!quantity) {
+            return new ResponseDTO('Error', 400, 'Campo não preenchido')
+        }
+
+        const product = await productsData.getProductById(id)
+
+        if (!product) {
+            return new ResponseDTO('Error', 404, 'Produto não encontrado')
+        }
+
+        const result = await productsData.decrementQuantityById(id, quantity)
+
+        if (result.acknowledged == true && result.modifiedCount == 1) {
+            const response = await productsData.getProductById(id)
+            
+            return new ResponseDTO('Success', 200, 'ok', response)
+        } else {
+            return new ResponseDTO('Error', 500, 'Erro no servidor/banco de dados')
+        }
 
     } catch (error) {
         console.log(`Error: ${error}`)

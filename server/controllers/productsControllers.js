@@ -21,6 +21,13 @@ exports.getProductById = async (req, res, next) => {
     response.sendResponse(res)
 }
 
+exports.getProductByCategory = async (req, res, next) => {
+    const { category } = req.params
+
+    const response = await productsService.getProductByCategory(category)
+    response.sendResponse(res)
+}
+
 exports.deleteProductById = async (req, res, next) => {
     const { id } = req.params
 
@@ -33,5 +40,21 @@ exports.updateProductById = async (req, res, next) => {
     const { field, value } = req.body
 
     const response = await productsService.updateProductById(id, field, value)
+    response.sendResponse(res)
+}
+
+exports.incrementQuantityById = async (req, res, next) => {
+    const { id }       = req.params
+    const { quantity } = req.body
+
+    const response = await productsService.incrementQuantityById(id, quantity)
+    response.sendResponse(res)
+}
+
+exports.decrementQuantityById = async (req, res, next) => {
+    const { id }       = req.params
+    const { quantity } = req.body
+
+    const response = await productsService.decrementQuantityById(id, quantity)
     response.sendResponse(res)
 }
