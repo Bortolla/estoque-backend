@@ -77,7 +77,7 @@ exports.updateSalesById = async (id, field, value) => {
         const sales = await salesData.getSalesById(id)
 
         if (!sales) {
-            return new ResponseDTO('Error', 404, 'Usuário não encontrado.')
+            return new ResponseDTO('Error', 404, 'Registro de venda não encontrado')
         }
 
         sales.field = value
