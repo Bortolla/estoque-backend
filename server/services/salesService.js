@@ -31,9 +31,15 @@ exports.postSales = async (quantity, total_price, productId, userId) => {
             return new ResponseDTO('Error', 400, 'O usuário com este id não existe')
         }
 
-        const response = await salesData.postSales(quantity, total_price, productId, product['category'], userId)
+        const decrementProduct = await productsData.decrementQuantityById(productId, 1)
 
-        return new ResponseDTO('Success', 200, 'ok', response)
+        if (decrementProduct.acknowledged == true && decrementProduct.modifiedCount == 1) {
+            const response = await salesData.postSales(quantity, total_price, productId, product['category'], userId)
+
+            return new ResponseDTO('Success', 200, 'ok', response)
+        } else {
+            return new ResponseDTO('Error', 500, 'Erro no servidor/banco de dados')
+        }
 
     } catch (error) {
         console.log(`Erro: ${error}`)
