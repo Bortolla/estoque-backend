@@ -15,7 +15,7 @@ exports.getSalesById = async (id) => {
 }
 
 exports.getSalesByCategory = async (category) => {
-    return await Sales.find({ category: category}, '-__v')
+    return await Sales.find({ productCategory: category}, '-__v')
 }
 
 exports.getSalesByProductId = async (productId) => {
