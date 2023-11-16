@@ -17,7 +17,9 @@ exports.postSales = async (quantity, total_price, productId, userId) => {
             return new ResponseDTO('Error', 400, 'Id do produto não preenchido')
         }
 
-        if (await productsData.getProductById(id)) {
+        const product = await productsData.getProductById(productId)
+
+        if (!product) {
             return new ResponseDTO('Error', 400, 'O produto com este id não existe')
         }
 
@@ -25,11 +27,11 @@ exports.postSales = async (quantity, total_price, productId, userId) => {
             return new ResponseDTO('Error', 400, 'Id do usuário não preenchido')
         }
 
-        if (await usersData.getUserById(id)) {
+        if (!await usersData.getUserById(userId)) {
             return new ResponseDTO('Error', 400, 'O usuário com este id não existe')
         }
 
-        const response = await salesData.postSales(quantity, total_price, productId, userId)
+        const response = await salesData.postSales(quantity, total_price, productId, product['category'], userId)
 
         return new ResponseDTO('Success', 200, 'ok', response)
 
@@ -53,9 +55,32 @@ exports.getAllSales = async () => {
 
 exports.getSalesById = async (id) => {
     try {
-        const { id }   = req.params
         const response = await salesData.getSalesById(id)
-        
+
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Erro: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.getSalesByCategory = async (category) => {
+    try {
+        const response = await salesData.getSalesByCategory(category)
+
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Erro: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
+exports.getSalesByProductId = async (id) => {
+    try {
+        const response = await salesData.getSalesByProductId(id)
+
         return new ResponseDTO('Success', 200, 'ok', response)
 
     } catch (error) {
@@ -80,7 +105,7 @@ exports.updateSalesById = async (id, field, value) => {
             return new ResponseDTO('Error', 404, 'Registro de venda não encontrado')
         }
 
-        sales.field = value
+        sales[field] = value
 
         await sales.validate()
         await sales.save()
@@ -97,7 +122,6 @@ exports.updateSalesById = async (id, field, value) => {
 
 exports.deleteSalesById = async (id) => {
     try {
-        const { id }   = req.params
         const response = await salesData.deleteSalesById(id)
         
         return new ResponseDTO('Success', 200, 'ok', response)

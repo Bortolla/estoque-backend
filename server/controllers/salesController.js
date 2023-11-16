@@ -16,7 +16,21 @@ exports.getSalesById = async (req, res, next) => {
     const { id } = req.params
     
     const response = await salesService.getSalesById(id)
-    response.sendResponse(id)
+    response.sendResponse(res)
+}
+
+exports.getSalesByCategory = async (req, res, next) => {
+    const { category } = req.params
+
+    const response = await salesService.getSalesByCategory(category)
+    response.sendResponse(res)
+}
+
+exports.getSalesByProductId = async (req, res, next) => {
+    const { id } = req.params
+
+    const response = await salesService.getSalesByProductId(id)
+    response.sendResponse(res)
 }
 
 exports.updateSalesById = async (req, res, next) => {

@@ -1,7 +1,7 @@
 const Sales = require('../models/SalesModel')
 
-exports.postSales = async (quantity, total_price, productId, userId) => {
-    const sales = new Sales({ quantity, total_price, productId, userId }, '-__v')
+exports.postSales = async (quantity, total_price, productId, productCategory, userId) => {
+    const sales = new Sales({ quantity, total_price, productId, productCategory, userId }, '-__v')
 
     return await sales.save()
 }
@@ -14,8 +14,12 @@ exports.getSalesById = async (id) => {
     return await Sales.findOne({ _id: id }, '-__v')
 }
 
+exports.getSalesByCategory = async (category) => {
+    return await Sales.find({ category: category}, '-__v')
+}
+
 exports.getSalesByProductId = async (productId) => {
-    return await Sales.findOne({ productId: productId }, '-__v')
+    return await Sales.find({ productId: productId }, '-__v')
 }
 
 exports.getSalesByUserId = async (userId) => {
@@ -23,5 +27,5 @@ exports.getSalesByUserId = async (userId) => {
 }
 
 exports.deleteSalesById = async (id) => {
-    return await Sales.deleteOne({ _id: id }, '-__v')
+    return await Sales.deleteOne({ _id: id })
 }

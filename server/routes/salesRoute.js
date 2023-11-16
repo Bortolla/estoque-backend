@@ -6,9 +6,11 @@ router.post('/', salesController.postSales)
 
 router.get('/', salesController.getAllSales)
 router.get('/:id', salesController.getSalesById)
+router.get('/category/:category', salesController.getSalesByCategory)
+router.get('/product/:id', salesController.getSalesByProductId)
 
 router.patch('/:id', salesController.updateSalesById)
 
-router.delete('/:id')
+router.delete('/:id', salesController.deleteSalesById)
 
 module.exports = router

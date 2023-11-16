@@ -20,6 +20,10 @@ const salesSchema = mongoose.Schema(
             type: String, // mongoose.Schema.Types.ObjectId
             required: true
         },
+        productCategory: {
+            type: String,
+            required: true
+        },
         userId: {
             type: String, // mongoose.Schema.Types.ObjectId
             required: true
