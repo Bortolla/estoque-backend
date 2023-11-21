@@ -140,9 +140,7 @@ exports.loginUser = async (email, password) => {
             id: user._id
         }, secret)
 
-        const { userName, userEmail } = user
-
-        return new ResponseDTO('Success', 200, 'ok', { token, userName, userEmail })
+        return new ResponseDTO('Success', 200, 'ok', { token: token, name: user.name, email: user.email, id: user._id })
 
     } catch (error) {
         console.log(`Erro: ${error}`)
