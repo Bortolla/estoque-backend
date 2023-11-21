@@ -10,8 +10,16 @@ exports.postUser = async (name, email, password, permission) => {
             return new ResponseDTO('Error', 400, 'Nome não preenchido')
         }
 
+        if (name.length <= 4) {
+            return new ResponseDTO('Error', 400, 'Nome curto')
+        }
+
         if (!email) {
             return new ResponseDTO('Error', 400, 'Email não preenchido')
+        }
+
+        if (email.length <= 4) {
+            return new ResponseDTO('Error', 400, 'Email curto')
         }
 
         if (await usersData.getUserByEmail(email)) {
@@ -26,7 +34,7 @@ exports.postUser = async (name, email, password, permission) => {
             return new ResponseDTO('Error', 400, 'Senha não preenchida')
         }
 
-        if (password.length < 5) {
+        if (password.length <= 4) {
             return new ResponseDTO('Error', 400, 'Senha curta')
         }
 
