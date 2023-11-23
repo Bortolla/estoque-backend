@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Nike\",\n    \"description\": \"comfortavel\",\n    \"price\": 50,\n    \"quantity\": 10,\n    \"category\": \"tenis\" \n}",
+							"raw": "{\n    \"name\": \"postman2\",\n    \"description\": \"postman2\",\n    \"price\": 50,\n    \"quantity\": 10,\n    \"category\": \"postman\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -80,14 +80,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/products/6555899096d746c91ef5693a",
+							"raw": "localhost:3000/products/655ef1c9b0e7995a1924bae1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"products",
-								"6555899096d746c91ef5693a"
+								"655ef1c9b0e7995a1924bae1"
 							]
 						}
 					},
@@ -114,13 +114,13 @@
 					"response": []
 				},
 				{
-					"name": "/:id",
+					"name": "/filter",
 					"request": {
-						"method": "PATCH",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"field\": \"category\",\n    \"value\": \"cosmetico\"\n}",
+							"raw": "{\n    \"key\": \"quantity\",\n    \"value\": \"2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -128,14 +128,43 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/products/6555a3db25fe6edc435aedc5",
+							"raw": "localhost:3000/products/filter/",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
 								"products",
-								"6555a3db25fe6edc435aedc5"
+								"filter",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"field\": \"name\",\n    \"value\": \"Boticard\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/products/655ef1c9b0e7995a1924bae1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"655ef1c9b0e7995a1924bae1"
 							]
 						}
 					},
@@ -213,7 +242,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"vitor@email\",\n    \"password\": \"senha\"\n}",
+							"raw": "{\n    \"email\": \"Bortolas@gmail.com\",\n    \"password\": \"Bortolas\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
