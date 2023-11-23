@@ -27,8 +27,6 @@ exports.postProduct = async (name, description, price, quantity, category) => {
             return new ResponseDTO('Error', 400, 'Categoria não preenchida')
         }
      
-        console.log(`name: ${name}\ndescription: ${description}\nprice: ${price}\nquantity: ${quantity}\ncategory: ${category}`)
-
         const response = await productsData.postProduct(name, description, price, quantity, category)
 
         return new ResponseDTO('Success', 200, 'ok', response)
