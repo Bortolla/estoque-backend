@@ -18,6 +18,10 @@ exports.getProductByCategory = async (category) => {
     return await Product.find({ category: category }, '-__v')
 }
 
+exports.getProductByFilter = async (key, value) => {
+    return await Product.find({ [key]: [value] }, '-__v')
+}
+
 exports.deleteProductById = async (id) => {
     return await Product.deleteOne({ _id: id })
 }

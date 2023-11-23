@@ -73,6 +73,23 @@ exports.getProductByCategory = async (category) => {
     }
 }
 
+exports.getProductByFilter = async (key, value) => {
+    try {
+        if (key && value) {
+            const response = await productsData.getProductByFilter(key, value)
+            return new ResponseDTO('Success', 200, 'ok', response)
+            
+        } else {
+            const response = await productsData.getProducts()
+            return new ResponseDTO('Success', 200, 'ok', response)
+        }
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
 exports.deleteProductById = async (id) => {
     try {
         const response = await productsData.deleteProductById(id)
@@ -134,7 +151,6 @@ exports.incrementQuantityById = async (id, quantity) => {
         } else {
             return new ResponseDTO('Error', 500, 'Erro no servidor/banco de dados')
         }
-
 
     } catch (error) {
         console.log(`Error: ${error}`)

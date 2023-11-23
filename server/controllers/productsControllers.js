@@ -28,6 +28,13 @@ exports.getProductByCategory = async (req, res, next) => {
     response.sendResponse(res)
 }
 
+exports.getProductByFilter = async (req, res, next) => {
+    const { key, value } = req.body
+
+    const response = await productsService.getProductByFilter(key, value)
+    response.sendResponse(res)
+}
+
 exports.deleteProductById = async (req, res, next) => {
     const { id } = req.params
 
