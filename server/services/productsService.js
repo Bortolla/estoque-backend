@@ -31,7 +31,7 @@ exports.postProduct = async (name, description, price, quantity, category) => {
 
         const response = await productsData.postProduct(name, description, price, quantity, category)
 
-        return new ResponseDTO('Success', 200, response)
+        return new ResponseDTO('Success', 200, 'ok', response)
 
     } catch (error) {
         console.log(`Error ${error}`)

@@ -95,7 +95,7 @@ exports.updateUserById = async (id, field, value) => {
 
         const response = await usersData.getUserById(id)
 
-        return new ResponseDTO('Success', 200, 'aqui', response)
+        return new ResponseDTO('Success', 200, 'ok', response)
 
     } catch (error) {
         console.log(`Erro: ${error}`)
