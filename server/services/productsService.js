@@ -101,6 +101,10 @@ exports.deleteProductById = async (id) => {
 
 exports.updateProductById = async (id, field, value) => {
     try {
+        if (!id) {
+            return new ResponseDTO('Error', 400, 'Identificador não preenchido')
+        }
+
         if (!field) {
             return new ResponseDTO('Error', 400, 'Campo não preenchido')
         }
