@@ -23,6 +23,10 @@ exports.postSales = async (quantity, total_price, productId, userId) => {
             return new ResponseDTO('Error', 400, 'O produto com este id não existe')
         }
 
+        if (product.quantity < 1) {
+            return new ResponseDTO('Error', 400, 'O produto não está em estoque para ser vendido')
+        }
+
         if (!userId) {
             return new ResponseDTO('Error', 400, 'Id do usuário não preenchido')
         }
