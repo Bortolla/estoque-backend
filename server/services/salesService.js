@@ -6,7 +6,7 @@ const usersData       = require('../data/usersData')
 exports.postSales = async (quantity, total_price, productId, userId) => {
     try {
         if (!quantity) {
-            return new ResponseDTO('Error', 400, 'Quantidade em estoque não preenchida')
+            return new ResponseDTO('Error', 400, 'Quantidade não preenchida')
         }
 
         if (!total_price) {
@@ -35,10 +35,14 @@ exports.postSales = async (quantity, total_price, productId, userId) => {
             return new ResponseDTO('Error', 400, 'O usuário com este id não existe')
         }
 
-        const decrementProduct = await productsData.decrementQuantityById(productId, 1)
+        if (product.quantity < quantity) {
+            return new ResponseDTO('Error', 400, 'A quantidade que desejas comprar é maior do que a do produto em estoque', product.quantity)
+        }
+
+        const decrementProduct = await productsData.decrementQuantityById(productId, quantity)
 
         if (decrementProduct.acknowledged == true && decrementProduct.modifiedCount == 1) {
-            const response = await salesData.postSales(quantity, total_price, productId, product['category'], userId)
+            const response = await salesData.postSales(quantity, quantity * product.price, productId, product['category'], userId)
 
             return new ResponseDTO('Success', 200, 'ok', response)
         } else {

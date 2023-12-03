@@ -18,7 +18,8 @@ exports.ResponseDTO = class {
         res.status(this.status).json({
           status: this.status,
           msg:    this.message,
-          erro:   this.message
+          erro:   this.message,
+          data:   this.data
         }) 
       }
     }
