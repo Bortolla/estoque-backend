@@ -1,9 +1,16 @@
 const salesService = require('../services/salesService')
 
 exports.postSales = async (req, res, next) => {
-    const { quantity, total_price, productId, userId } = req.body
+    const { quantity, productId, userId } = req.body
 
-    const response = await salesService.postSales(quantity, total_price, productId, userId)
+    const response = await salesService.postSales(quantity, productId, userId)
+    response.sendResponse(res)
+}
+
+exports.getSalesByFilter = async (req, res, next) => {
+    const { key, value } = req.body
+
+    const response = await salesService.getSalesByFilter(key, value)
     response.sendResponse(res)
 }
 

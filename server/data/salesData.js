@@ -18,6 +18,10 @@ exports.getSalesByCategory = async (category) => {
     return await Sales.find({ productCategory: category}, '-__v')
 }
 
+exports.getSalesByFilter = async (key, value) => {
+    return await Sales.find({ [key]: [value] }, '-__v')
+}
+
 exports.getSalesByProductId = async (productId) => {
     return await Sales.find({ productId: productId }, '-__v')
 }

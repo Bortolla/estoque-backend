@@ -3,6 +3,7 @@ const salesController = require('../controllers/salesController')
 const router          = express.Router()
 
 router.post('/', salesController.postSales)
+router.post('/filter', salesController.getSalesByFilter)
 
 router.get('/', salesController.getAllSales)
 router.get('/:id', salesController.getSalesById)
