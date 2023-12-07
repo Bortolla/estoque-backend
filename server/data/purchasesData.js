@@ -17,3 +17,7 @@ exports.getPurchaseById = async (id) => {
 exports.getPurchaseByProductId = async (id) => {
     return await Purchase.find({ productId: id })
 }
+
+exports.getPurchaseByFilter = async (key, value) => {
+    return await Purchase.find({ [key]: [value] }, '-__v')
+}

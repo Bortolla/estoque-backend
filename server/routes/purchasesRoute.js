@@ -3,6 +3,7 @@ const router  = express.Router()
 const purchasesController = require('../controllers/purchasesController')
 
 router.post('/', purchasesController.postPurchase)
+router.post('/filter', purchasesController.getPurchaseByFilter)
 
 router.get('/product/:id', purchasesController.getPurchaseByProductId)
 router.get('/', purchasesController.getAllPurchases)

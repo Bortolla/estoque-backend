@@ -27,3 +27,10 @@ exports.getPurchaseByProductId = async (req, res, next) => {
 
     response.sendResponse(res)
 }
+
+exports.getPurchaseByFilter = async (req, res, next) => {
+    const { key, value } = req.body
+
+    const response = await purchasesController.getPurchaseByFilter(key, value)
+    response.sendResponse(res)
+}

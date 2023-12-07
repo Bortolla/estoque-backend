@@ -89,3 +89,20 @@ exports.getPurchaseByProductId = async (id) => {
         return new ResponseDTO('Error', 500, 'Erro no servidor')
     }
 }
+
+exports.getPurchaseByFilter = async (key, value) => {
+    try {
+        if (key && value) {
+            const response = await purchasesData.getPurchaseByFilter(key, value)
+            return new ResponseDTO('Success', 200, 'ok', response)
+            
+        } else {
+            const response = await purchasesData.getAllPurchases()
+            return new ResponseDTO('Success', 200, 'ok', response)
+        }
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
