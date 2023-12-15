@@ -7,6 +7,13 @@ exports.postUser = async (req, res, next) => {
     response.sendResponse(res)
 }
 
+exports.getUsersByFilter = async (req, res, next) => {
+    const { key, value } = req.body
+
+    const response = await usersService.getUsersByFilter(key, value)
+    response.sendResponse(res)
+}
+
 exports.getAllUsers = async (req, res, next) => {
     const response = await usersService.getAllUsers()
     response.sendResponse(res)

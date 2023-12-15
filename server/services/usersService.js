@@ -50,6 +50,23 @@ exports.postUser = async (name, email, password, permission) => {
     }
 }
 
+exports.getUsersByFilter = async (key, value) => {
+    try {
+        if (key && value) {
+            const response = await usersData.getUsersByFilter(key, value)
+            return new ResponseDTO('Success', 200, 'ok', response)
+            
+        } else {
+            const response = await usersData.getAllUsers()
+            return new ResponseDTO('Success', 200, 'ok', response)
+        }
+
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
 exports.getAllUsers = async () => {
     try {
         const response = await usersData.getAllUsers()

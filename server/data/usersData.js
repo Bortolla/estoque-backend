@@ -9,6 +9,10 @@ exports.postUser = async (name, email, password, permission) => {
 exports.getAllUsers = async () => {
     return User.find({}, '-__v -password')
 }
+
+exports.getUsersByFilter = async (key, value) => {
+    return await User.find({ [key]: [value] }, '-__v')
+}
  
 exports.getUserById = async (id) => {
     return User.findOne({ _id: id }, '-__v -password')
