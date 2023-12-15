@@ -34,3 +34,8 @@ exports.getPurchaseByFilter = async (req, res, next) => {
     const response = await purchasesController.getPurchaseByFilter(key, value)
     response.sendResponse(res)
 }
+
+exports.cleanDatabase = async (req, res, next) => {
+    const response = await purchasesController.cleanDatabase()
+    response.sendResponse(res)
+}

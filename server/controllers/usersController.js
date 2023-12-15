@@ -33,6 +33,11 @@ exports.deleteUserById = async (req, res, next) => {
     response.sendResponse(res)
 }
 
+exports.cleanDatabase = async (req, res, next) => {
+    const response = await usersService.cleanDatabase()
+    response.sendResponse(res)
+}
+
 exports.updateUserById = async (req, res, next) => {
     const { id }            = req.params
     const { field, value }  = req.body

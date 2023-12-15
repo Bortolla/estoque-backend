@@ -21,3 +21,7 @@ exports.getPurchaseByProductId = async (id) => {
 exports.getPurchaseByFilter = async (key, value) => {
     return await Purchase.find({ [key]: [value] }, '-__v')
 }
+
+exports.cleanDatabase = async () => {
+    return Purchase.deleteMany({ })
+}

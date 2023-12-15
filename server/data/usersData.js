@@ -25,3 +25,7 @@ exports.getUserByEmail = async (email) => {
 exports.deleteUserById = async (id) => {
     return User.deleteOne({ _id: id })
 }
+
+exports.cleanDatabase = async () => {
+    return User.deleteMany({ })
+}

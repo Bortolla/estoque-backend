@@ -41,3 +41,7 @@ exports.decrementQuantityById = async (id, quantity) => {
 
     return await Product.updateOne({ _id: id }, { quantity: (Number(product.quantity) - Number(quantity)) })
 }
+
+exports.cleanDatabase = async () => {
+    return Product.deleteMany({ })
+}

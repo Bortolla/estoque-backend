@@ -14,5 +14,6 @@ router.patch('/inventory/increment/:id', productsController.incrementQuantityByI
 router.patch('/inventory/decrement/:id', productsController.decrementQuantityById)
 
 router.delete('/:id', productsController.deleteProductById)
+router.delete('/', productsController.cleanDatabase)
 
 module.exports = router

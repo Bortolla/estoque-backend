@@ -65,3 +65,8 @@ exports.decrementQuantityById = async (req, res, next) => {
     const response = await productsService.decrementQuantityById(id, quantity)
     response.sendResponse(res)
 }
+
+exports.cleanDatabase = async (req, res, next) => {
+    const response = await productsService.cleanDatabase()
+    response.sendResponse(res)
+}

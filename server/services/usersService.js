@@ -131,6 +131,17 @@ exports.deleteUserById = async (id) => {
     }
 }
 
+exports.cleanDatabase = async () => {
+    try {
+        const response = await usersData.cleanDatabase()
+        return new ResponseDTO('Success', 200, 'ok', response)
+
+    } catch (error) {
+        console.log(`Erro: ${error}`)
+        return new ResponseDTO('Error', 500, 'Erro no servidor')
+    }
+}
+
 exports.loginUser = async (email, password) => {
     try {
         if (!email) {

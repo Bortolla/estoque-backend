@@ -11,6 +11,7 @@ router.get('/:id', usersController.getUserById)
 router.patch('/:id', usersController.updateUserById)
 
 router.delete('/:id', usersController.deleteUserById)
+router.delete('/', usersController.cleanDatabase)
 
 router.post('/login', usersController.loginUser)
 

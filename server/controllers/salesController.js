@@ -54,3 +54,8 @@ exports.deleteSalesById = async (req, res, next) => {
     const response = await salesService.deleteSalesById(id)
     response.sendResponse(res)
 }
+
+exports.cleanDatabase = async (req, res, next) => {
+    const response = await salesService.cleanDatabase()
+    response.sendResponse(res)
+}

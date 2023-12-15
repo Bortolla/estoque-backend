@@ -33,3 +33,7 @@ exports.getSalesByUserId = async (userId) => {
 exports.deleteSalesById = async (id) => {
     return await Sales.deleteOne({ _id: id })
 }
+
+exports.cleanDatabase = async () => {
+    return Sales.deleteMany({ })
+}
